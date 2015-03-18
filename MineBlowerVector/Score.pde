@@ -110,7 +110,9 @@ class Score
   {
     gameState = 3;
     score += health;
-    aud.safePlay(aud.sunkSnd);
+    if (!aud.sinkingSnd.isPlaying()){
+        aud.safePlay(aud.sunkSnd);
+    }
   }
 
   void youWon()
