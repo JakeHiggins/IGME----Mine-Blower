@@ -244,8 +244,8 @@ class PingTone
 
   PingTone()         // Constructor creates an object for the pings
   {
-    myWave = new Oscil( 1000, 0.4, Waves.SINE ); // 1000 Hz, kinda loud
-    myDamp = new Damp( 0.01, 0.15, 0.9 );         // Attack, decay time, amp
+    myWave = new Oscil( 1000, 0.5, Waves.SINE ); // 1000 Hz, kinda loud
+    myDamp = new Damp( 0.05, 0.25, 0.9 );         // Attack, decay time, amp
     myDelay = new Delay( 0.75, 0.5, true, true ); // Delay with feedback
     myPan = new Pan(random(-1.0, 1.0));          // Random pan location
     myWave.patch(myDamp).patch(myDelay).patch(myPan); // Chain together
