@@ -24,7 +24,6 @@ class Audio
   AudioSample groundSnd;
   AudioPlayer noMoreSnd;
   AudioPlayer fireSnd;
-  AudioPlayer backSnd;
   AudioPlayer tooLeftSnd;
   AudioPlayer tooRightSnd;
   AudioPlayer tooUpSnd;
@@ -34,6 +33,17 @@ class Audio
   AudioPlayer winSnd;
   AudioPlayer bubbleSnd;
   AudioPlayer torpRunSnd;
+  
+  AudioPlayer backSnd; //Music
+  AudioPlayer ambient1Snd;
+  AudioPlayer ambient2Snd;
+  
+  AudioPlayer disarmDialog;
+  AudioPlayer diveDialog;
+  AudioPlayer fireDialog;
+  AudioPlayer forwardDialog;
+  AudioPlayer sinkingDialog;
+  AudioPlayer sunkDialog;
 
   AudioOutput out;    // Used for PingTone
 
@@ -52,19 +62,30 @@ class Audio
     groundSnd = minim.loadSample("Audio/Ours/Grounded.wav", 512);
     noMoreSnd = minim.loadFile("Audio/Ours/NoMore.wav", 512);
     fireSnd = minim.loadFile("Audio/Ours/Fire.wav", 512);
-    backSnd = minim.loadFile("Audio/Ours/Anthem.wav", 512);
-    backSnd.setGain(-24.0);
-    tooLeftSnd = minim.loadFile("Audio/TooLeft.mp3", 512);
-    tooRightSnd = minim.loadFile("Audio/TooRight.mp3", 512);
-    tooUpSnd = minim.loadFile("Audio/TooUp.mp3", 512);
-    tooDownSnd = minim.loadFile("Audio/TooDown.mp3", 512);
+    tooLeftSnd = minim.loadFile("Audio/Ours/Dialog/TooFarLeft.wav", 512);
+    tooRightSnd = minim.loadFile("Audio/Ours/Dialog/TooFarRight.wav", 512);
+    tooUpSnd = minim.loadFile("Audio/Ours/Dialog/TooFarUp.wav", 512);
+    tooDownSnd = minim.loadFile("Audio/Ours/Dialog/TooFarDown.wav", 512);
     sinkingSnd = minim.loadFile("Audio/Ours/Dialog/Sinking.wav", 512);
     sunkSnd = minim.loadFile("Audio/Ours/Dialog/Sunk.wav", 512);
     winSnd = minim.loadFile("Audio/Win.mp3", 512);
     bubbleSnd = minim.loadFile("Audio/Ours/Bubbles.wav", 512);
     bubbleSnd.setGain(-12.0);
     torpRunSnd = minim.loadFile("Audio/Ours/TorpedoRun.wav", 512);
-    //torpRun.setGain(-12.0);
+    
+    //Ambient / Music
+    backSnd = minim.loadFile("Audio/Ours/Anthem.wav", 512);
+    backSnd.setGain(-24.0);
+    ambient1Snd = minim.loadFile("Audio/Ours/ambientSnd3.wav", 512);
+    ambient2Snd = minim.loadFile("Audio/Ours/spookyWaters.wav", 512);
+    
+    // Dialog
+    disarmDialog = minim.loadFile("Audio/Ours/Dialog/Disarm.wav", 512);
+    diveDialog = minim.loadFile("Audio/Ours/Dialog/Down.wav", 512);
+    fireDialog = minim.loadFile("Audio/Ours/Dialog/Fire.wav", 512);
+    forwardDialog = minim.loadFile("Audio/Ours/Dialog/Forward.wav", 512);
+    sinkingDialog = minim.loadFile("Audio/Ours/Dialog/Sinking.wav", 512);
+    sunkDialog = minim.loadFile("Audio/Ours/Dialog/Sunk.wav", 512);
 
     out = minim.getLineOut();    // Used for PingTone
   }
@@ -91,6 +112,16 @@ class Audio
     bubbleSnd.pause();
     torpRunSnd.pause();
     out.mute();
+    
+    ambient1Snd.pause();
+    ambient2Snd.pause();
+    
+    disarmDialog.pause();
+    diveDialog.pause();
+    fireDialog.pause();
+    forwardDialog.pause();
+    sinkingDialog.pause();
+    sunkDialog.pause();
   }
 
   void closeAll()  // Called from stop() in main
@@ -114,6 +145,36 @@ class Audio
     winSnd.close();
     bubbleSnd.close();
     torpRunSnd.close();
+    
+    ambient1Snd.close();
+    ambient2Snd.close();
+    
+    disarmDialog.close();
+    diveDialog.close();
+    fireDialog.close();
+    forwardDialog.close();
+    sinkingDialog.close();
+    sunkDialog.close();
+  }
+  
+  void randomPlay(AudioPlayer snd, float chance, float location) 
+  {
+    if(!snd.isPlaying() &&
+       !disarmDialog.isPlaying() &&
+       !diveDialog.isPlaying() &&
+       !fireDialog.isPlaying() &&
+       !forwardDialog.isPlaying() &&
+       !sinkingDialog.isPlaying() &&
+       !sunkDialog.isPlaying() &&
+       !tooLeftSnd.isPlaying() &&
+       !tooRightSnd.isPlaying() &&
+       !tooUpSnd.isPlaying() &&
+       !tooDownSnd.isPlaying()) {
+      float r = random(100);
+      if(r < chance) {
+       safePlay(snd, location);
+      }
+    }
   }
 
   // Plays snd beginning at pan location x, panning in real time
@@ -228,6 +289,7 @@ class Audio
   {
     safePlay(tooDownSnd);
   }
+  
 }
 
 /* PingTone class - by Al Biles

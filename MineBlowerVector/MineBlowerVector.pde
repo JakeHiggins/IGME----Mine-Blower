@@ -110,6 +110,10 @@ void draw()
     }
 
     // Update /////////////////////////////////////////
+    //Ambient sounds randomly trigger
+    aud.randomPlay(aud.ambient1Snd, 30, width/2);
+    aud.randomPlay(aud.ambient2Snd, 30, width/2);
+    
     b1.move();                        // Animate the bubbles
     // Ambient sonar ping
     maybePing();

@@ -39,8 +39,10 @@ class Torpedo
       tState = 1;
       aud.panPlay(aud.torpRunSnd, subLoc.x, launchV);
     }
-    else if (tState == 3)   // No more torpedos, state is a sink
+    else if (tState == 3) {   // No more torpedos, state is a sink
       aud.safePlay (aud.noMoreSnd, subLoc.x);
+      aud.randomPlay(aud.fireDialog, 10, subLoc.x);
+    }
   }
 
   boolean running()

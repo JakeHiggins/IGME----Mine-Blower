@@ -189,6 +189,7 @@ class Sub
     {
       d.y = d.y + yBoost;    // Boost down to overcome buoyancy
       aud.safePlay(aud.diveSnd, loc.x);
+      aud.randomPlay(aud.diveDialog, 2, loc.x);
     }
     if (leftPressed)         // Handle LEFT arrow
     {
@@ -204,6 +205,7 @@ class Sub
       d.x = d.x + xBoost;
       curFrm = (curFrm + 1) % gr.nSubFrms;  // Animate propeller
       aud.safePlay(aud.forwardSnd, loc.x);
+      aud.randomPlay(aud.forwardDialog, 2, loc.x);
     }
 
     baseMove();              // Move the sub

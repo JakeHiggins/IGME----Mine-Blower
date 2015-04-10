@@ -102,6 +102,7 @@ class Mine
       inactiveTime = INACTIVE_MAX;
       fadeTime = FADE_MAX;  // Start fading away
       aud.triggerWhere(aud.disarmSnd, loc.x);
+      aud.randomPlay(aud.disarmDialog, 30, loc.x);
       sc.disarmed();
     }
   }
