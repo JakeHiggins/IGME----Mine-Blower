@@ -68,7 +68,7 @@ class Audio
     tooDownSnd = minim.loadFile("Audio/Ours/Dialog/TooFarDown.wav", 512);
     sinkingSnd = minim.loadFile("Audio/Ours/Dialog/Sinking.wav", 512);
     sunkSnd = minim.loadFile("Audio/Ours/Dialog/Sunk.wav", 512);
-    winSnd = minim.loadFile("Audio/Win.mp3", 512);
+    winSnd = minim.loadFile("Audio/Ours/Win.wav", 512);
     bubbleSnd = minim.loadFile("Audio/Ours/Bubbles.wav", 512);
     bubbleSnd.setGain(-12.0);
     torpRunSnd = minim.loadFile("Audio/Ours/TorpedoRun.wav", 512);
@@ -78,7 +78,7 @@ class Audio
     backSnd.setGain(-24.0);
     ambient1Snd = minim.loadFile("Audio/Ours/ambientSnd3.wav", 512);
     ambient2Snd = minim.loadFile("Audio/Ours/spookyWaters.wav", 512);
-    
+    ambient2Snd.setGain(-24.0); 
     // Dialog
     disarmDialog = minim.loadFile("Audio/Ours/Dialog/Disarm.wav", 512);
     diveDialog = minim.loadFile("Audio/Ours/Dialog/Down.wav", 512);
