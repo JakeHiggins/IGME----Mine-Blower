@@ -50,11 +50,11 @@ class Audio
   void loadAudio()    // Called in setup()
   {
     forwardSnd = minim.loadFile("Audio/Ours/Forward.wav", 512);
-    forwardSnd.setGain(-8.0);     // Turn it down
+    forwardSnd.setGain(0.0);     // Turn it down
     reverseSnd = minim.loadFile("Audio/Ours/Reverse.wav", 512);
-    reverseSnd.setGain(-8.0);
+    reverseSnd.setGain(-5.0);
     diveSnd = minim.loadFile("Audio/Ours/Dive.wav", 512);
-    diveSnd.setGain(-8.0);
+    diveSnd.setGain(0.0);
     bangSnd = minim.loadSample("Audio/Ours/Bang.wav", 512);
     disarmSnd = minim.loadSample("Audio/Ours/Disarm.wav", 512);
     zapSnd = minim.loadSample("Audio/Ours/Zap.wav", 512);
@@ -64,6 +64,7 @@ class Audio
     fireSnd = minim.loadFile("Audio/Ours/Fire.wav", 512);
     tooLeftSnd = minim.loadFile("Audio/Ours/Dialog/TooFarLeft.wav", 512);
     tooRightSnd = minim.loadFile("Audio/Ours/Dialog/TooFarRight.wav", 512);
+    tooRightSnd.setGain(5.0);
     tooUpSnd = minim.loadFile("Audio/Ours/Dialog/TooFarUp.wav", 512);
     tooDownSnd = minim.loadFile("Audio/Ours/Dialog/TooFarDown.wav", 512);
     sinkingSnd = minim.loadFile("Audio/Ours/Dialog/Sinking.wav", 512);
@@ -75,12 +76,14 @@ class Audio
     
     //Ambient / Music
     backSnd = minim.loadFile("Audio/Ours/Anthem.wav", 512);
-    backSnd.setGain(-24.0);
+    backSnd.setGain(-10.0);
     ambient1Snd = minim.loadFile("Audio/Ours/ambientSnd3.wav", 512);
     ambient2Snd = minim.loadFile("Audio/Ours/spookyWaters.wav", 512);
     ambient2Snd.setGain(-24.0); 
     // Dialog
     disarmDialog = minim.loadFile("Audio/Ours/Dialog/Disarm.wav", 512);
+    disarmDialog.setGain(5.0);
+
     diveDialog = minim.loadFile("Audio/Ours/Dialog/Down.wav", 512);
     fireDialog = minim.loadFile("Audio/Ours/Dialog/Fire.wav", 512);
     forwardDialog = minim.loadFile("Audio/Ours/Dialog/Forward.wav", 512);
@@ -171,6 +174,7 @@ class Audio
        !tooUpSnd.isPlaying() &&
        !tooDownSnd.isPlaying()) {
       float r = random(100);
+      println(r);
       if(r < chance) {
        safePlay(snd, location);
       }

@@ -157,8 +157,10 @@ class Sub
       sinkingMove();
     else
     {
-      sc.youSank();
-      gameState = 3;         // subState 3 - sub sunk, game over
+      if (!aud.sinkingSnd.isPlaying()){
+        sc.youSank();
+        gameState = 3;         // subState 3 - sub sunk, game over
+      }
     }
   }
 
@@ -189,7 +191,7 @@ class Sub
     {
       d.y = d.y + yBoost;    // Boost down to overcome buoyancy
       aud.safePlay(aud.diveSnd, loc.x);
-      aud.randomPlay(aud.diveDialog, 2, loc.x);
+      aud.randomPlay(aud.diveDialog, 0.5, loc.x);
     }
     if (leftPressed)         // Handle LEFT arrow
     {
@@ -205,7 +207,7 @@ class Sub
       d.x = d.x + xBoost;
       curFrm = (curFrm + 1) % gr.nSubFrms;  // Animate propeller
       aud.safePlay(aud.forwardSnd, loc.x);
-      aud.randomPlay(aud.forwardDialog, 2, loc.x);
+      aud.randomPlay(aud.forwardDialog, 0.5, loc.x);
     }
 
     baseMove();              // Move the sub
